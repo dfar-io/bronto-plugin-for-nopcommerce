@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/a5376e62923f0cc987ca/maintainability)](https://codeclimate.com/github/dfar-io/bronto-plugin-for-nopcommerce/maintainability)
+
 # bronto-plugin-for-nopcommerce
 Integrates a nopCommerce store with Oracle Bronto Email Marketing Software
 

@@ -16,6 +16,7 @@ namespace Nop.Plugin.Widgets.Bronto.Infrastructure
                ITypeFinder typeFinder,
                AppSettings appSettings
         ) {
+            services.AddScoped<IBrontoEmailListService, BrontoEmailListService>();
             services.AddScoped<IBrontoLineItemService, BrontoLineItemService>();
         }
     }

@@ -12,20 +12,22 @@ using Nop.Core.Domain.Messages;
 using Nop.Services.Logging;
 using System.Net.Http;
 using Task = System.Threading.Tasks.Task;
+using Nop.Plugin.Widgets.Bronto.Services;
 
 namespace Nop.Plugin.Widgets.Bronto
 {
     public class BrontoPlugin : BasePlugin, IWidgetPlugin, IConsumer<EmailSubscribedEvent>,
                                                            IConsumer<EmailUnsubscribedEvent>
     {
+        private readonly IBrontoEmailListService _brontoEmailListService;
         private readonly IWebHelper _webHelper;
         private readonly ISettingService _settingService;
         private readonly ILocalizationService _localizationService;
         private readonly ILogger _logger;
-        private readonly HttpClient _httpClient;
         private readonly BrontoSettings _brontoSettings;
 
         public BrontoPlugin(
+            IBrontoEmailListService brontoEmailListService,
             IWebHelper webHelper,
             ISettingService settingService,
             ILocalizationService localizationService,
@@ -33,12 +35,12 @@ namespace Nop.Plugin.Widgets.Bronto
             BrontoSettings brontoSettings
         )
         {
+            _brontoEmailListService = brontoEmailListService;
             _webHelper = webHelper;
             _settingService = settingService;
             _localizationService = localizationService;
             _logger = logger;
             _brontoSettings = brontoSettings;
-            _httpClient = new HttpClient();
         }
 
         public bool HideInWidgetList => false;
@@ -60,36 +62,12 @@ namespace Nop.Plugin.Widgets.Bronto
 
         public async Task HandleEventAsync(EmailSubscribedEvent eventMessage)
         {
-            var email = eventMessage.Subscription.Email;
-            var directAddListId = _brontoSettings.DirectAddListId;
-            if (string.IsNullOrWhiteSpace(directAddListId))
-            {
-                await _logger.ErrorAsync($"Unable to add email {email} to Bronto - " +
-                               "please set the Direct Add List ID in Settings.");
-                return;
-            }
-
-            HttpResponseMessage response =
-                await _httpClient.GetAsync(
-                    $"https://app.bronto.com/public/?q=direct_add&fn=Public_DirectAddForm&id={directAddListId}&email={email}");
-            response.EnsureSuccessStatusCode();
+            await _brontoEmailListService.SubscribeEmailAsync(eventMessage.Subscription.Email);
         }
 
         public async Task HandleEventAsync(EmailUnsubscribedEvent eventMessage)
         {
-            var email = eventMessage.Subscription.Email;
-            var directAddListId = _brontoSettings.DirectAddListId;
-            if (string.IsNullOrWhiteSpace(directAddListId))
-            {
-                await _logger.ErrorAsync($"Unable to unsubscribe email {email} in Bronto - " +
-                               "please set the Direct Add List ID in Settings.");
-                return;
-            }
-
-            HttpResponseMessage response =
-                await _httpClient.GetAsync(
-                    $"https://app.bronto.com/public/?q=direct_unsub&fn=Public_DirectUnsubForm&id={directAddListId}&email={email}");
-            response.EnsureSuccessStatusCode();
+            await _brontoEmailListService.UnsubscribeEmailAsync(eventMessage.Subscription.Email);
         }
 
         public override async Task InstallAsync()

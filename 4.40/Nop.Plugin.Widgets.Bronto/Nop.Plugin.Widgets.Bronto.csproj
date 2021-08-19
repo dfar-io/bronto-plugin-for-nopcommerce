@@ -46,6 +46,7 @@
     <ProjectReference Include="..\nopSource\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
     <ProjectReference Include="..\nopSource\Presentation\Nop.Web\Nop.Web.csproj" />
     <ProjectReference Include="..\nopSource\Libraries\Nop.Services\Nop.Services.csproj" />
+    <ProjectReference Include="..\nopSource\Libraries\Nop.Core\Nop.Core.csproj" />
     <ClearPluginAssemblies Include="$(MSBuildProjectDirectory)\..\nopSource\Build\ClearPluginAssemblies.proj" />
   </ItemGroup>
 

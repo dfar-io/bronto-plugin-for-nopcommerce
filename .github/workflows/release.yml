@@ -18,7 +18,7 @@ jobs:
         mv Binary_4.40 4.40/Widgets.Bronto
         mv Source_4.40 4.40/Nop.Plugin.Widgets.Bronto
     - name: Zip artifact files
-      run: 7z x Bronto.zip
+      run: 7z a Bronto.zip .
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
       with:

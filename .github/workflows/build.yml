@@ -26,10 +26,15 @@ jobs:
       run: dotnet build nopSource/NopCommerce.sln -c Release
       working-directory: '4.40'
     - uses: actions/upload-artifact@v2
+      if: ${{ github.event_name == 'push' }}
       with:
         name: Source_4.40
         path: 4.40/Nop.Plugin.Widgets.Bronto
     - uses: actions/upload-artifact@v2
+      if: ${{ github.event_name == 'push' }}
       with:
         name: Binary_4.40
         path: 4.40/nopSource/Presentation/Nop.Web/Plugins/Widgets.Bronto
+    - name: Release
+      if: ${{ github.event_name == 'push' }}
+      uses: softprops/action-gh-release@v1

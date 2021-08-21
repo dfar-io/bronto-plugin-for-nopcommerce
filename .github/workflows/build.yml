@@ -35,6 +35,3 @@ jobs:
       with:
         name: Binary_4.40
         path: 4.40/nopSource/Presentation/Nop.Web/Plugins/Widgets.Bronto
-    - name: Release
-      if: ${{ github.event_name == 'push' }}
-      uses: softprops/action-gh-release@v1

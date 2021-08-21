@@ -27,5 +27,9 @@ jobs:
       working-directory: '4.40'
     - uses: actions/upload-artifact@v2
       with:
-        name: Widgets.Bronto
+        name: Source_4.40
+        path: 4.40/Nop.Plugin.Widgets.Bronto
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Binary_4.40
         path: 4.40/nopSource/Presentation/Nop.Web/Plugins/Widgets.Bronto

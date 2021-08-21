@@ -18,7 +18,9 @@ jobs:
     - name: Install nopCommerce Source
       run: ./init.sh
     - name: Add plugin to nopCommerce
-      run: ./versionInit.sh
+      run: |
+        chmod u+x versionInit.sh
+        ./versionInit.sh
       working-directory: '4.40'
     - name: Build
       run: dotnet build nopSource/NopCommerce.sln -c Release

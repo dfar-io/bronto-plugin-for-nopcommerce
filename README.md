@@ -1,3 +1,4 @@
+![Build](https://github.com/dfar-io/bronto-plugin-for-nopcommerce/actions/workflows/build.yml/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a5376e62923f0cc987ca/maintainability)](https://codeclimate.com/github/dfar-io/bronto-plugin-for-nopcommerce/maintainability)
 
 # bronto-plugin-for-nopcommerce

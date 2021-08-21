@@ -83,19 +83,20 @@ namespace Nop.Plugin.Widgets.Bronto.Services
             var productPictureUrl = productPictures.Any() ?
                                         await _pictureService.GetPictureUrlAsync(productPictures[0].Id) :
                                         "";
-            return new BrontoLineItem(
-                Sku: product.Sku,
-                Name: product.Name,
-                Description: shortDescription,
-                Category: await GetProductCategoryBreadcrumbAsync(product),
-                Other: "", //not currently in use
-                UnitPrice: unitPrice,
-                SalePrice: product.Price,
-                Quantity: quantity,
-                TotalPrice: product.Price * quantity,
-                ImageUrl: productPictureUrl,
-                ProductUrl: productUrl
-            );
+            return new BrontoLineItem()
+            {
+                Sku = product.Sku,
+                Name = product.Name,
+                Description = shortDescription,
+                Category = await GetProductCategoryBreadcrumbAsync(product),
+                Other = "", //not currently in use
+                UnitPrice = unitPrice,
+                SalePrice = product.Price,
+                Quantity = quantity,
+                TotalPrice = product.Price * quantity,
+                ImageUrl = productPictureUrl,
+                ProductUrl = productUrl
+            };
         }
 
         private async Task<string> GetProductCategoryBreadcrumbAsync(Product product)

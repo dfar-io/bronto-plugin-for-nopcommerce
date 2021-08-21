@@ -15,4 +15,9 @@ jobs:
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
       with:
-        files: '**'
+        files: '**/*'
+    - name: Rename directories
+      run: |
+        mkdir 4.40
+        mv Binary_4.40 4.40/Widgets.Bronto
+        mv Source_4.40 4.40/Nop.Plugin.Widgets.Bronto

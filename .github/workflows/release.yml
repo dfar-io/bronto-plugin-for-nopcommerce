@@ -17,6 +17,9 @@ jobs:
         mkdir 4.40
         mv Binary_4.40 4.40/Widgets.Bronto
         mv Source_4.40 4.40/Nop.Plugin.Widgets.Bronto
+    - uses: actions/nopcommerce-uploadeditems-action@v0.1
+      with:
+        plugin-name: 'Nop.Plugin.Widgets.Bronto'
     - name: Zip artifact files
       run: 7z a Bronto.zip .
     - name: Upload to Release
